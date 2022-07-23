@@ -132,7 +132,7 @@ const lazyLoadingData = ref(null);
 
 const resetData = () => {
   // 需要更新数据地址空间
-  data.value = getData();
+  // data.value = getData();
   table.value.resetData(data.value);
 };
 
