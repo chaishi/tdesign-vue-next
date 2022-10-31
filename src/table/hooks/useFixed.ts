@@ -555,6 +555,10 @@ export default function useFixed(
     data.value = dataSource;
   };
 
+  const setFixedTableContentRef = (tableContent: HTMLDivElement) => {
+    tableContentRef.value = tableContent;
+  };
+
   return {
     tableWidth,
     tableElmWidth,
@@ -577,5 +581,6 @@ export default function useFixed(
     updateThWidthList,
     setRecalculateColWidthFuncRef,
     addTableResizeObserver,
+    setFixedTableContentRef,
   };
 }

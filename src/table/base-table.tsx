@@ -55,6 +55,7 @@ export default defineComponent({
   setup(props: BaseTableProps, context: SetupContext) {
     const renderTNode = useTNodeJSX();
     const tableRef = ref<HTMLDivElement>();
+    const tableContentRef = ref<HTMLDivElement>();
     const tableElmRef = ref<HTMLTableElement>();
     const tableBodyRef = ref<HTMLTableElement>();
     const tableFootHeight = ref(0);
@@ -78,7 +79,7 @@ export default defineComponent({
       virtualScrollHeaderPos,
       tableWidth,
       tableElmWidth,
-      tableContentRef,
+      setFixedTableContentRef,
       isFixedHeader,
       isWidthOverflow,
       isFixedColumn,
@@ -186,7 +187,7 @@ export default defineComponent({
     };
 
     const { type, rowHeight, bufferSize = 20, isFixedRowHeight = false } = props.scroll || {};
-    const { data } = toRefs<any>(props);
+    const { data, height } = toRefs<any>(props);
     const {
       trs = null,
       scrollHeight = null,
@@ -202,6 +203,7 @@ export default defineComponent({
           lineHeight: rowHeight,
           bufferSize,
           threshold: props.scroll?.threshold,
+          height,
         })
       : {};
     provide('tableContentRef', tableContentRef);
@@ -230,6 +232,7 @@ export default defineComponent({
 
     watch(tableContentRef, () => {
       setTableContentRef(tableContentRef.value);
+      setFixedTableContentRef(tableContentRef.value);
     });
 
     watch(tableElmRef, getTFootHeight);

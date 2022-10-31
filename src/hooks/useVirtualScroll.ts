@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { ref, toRefs, reactive, onMounted, computed, watch, nextTick } from 'vue';
+import { ref, Ref, toRefs, reactive, onMounted, computed, watch, nextTick } from 'vue';
 
 // 虚拟滚动Hooks的完整实现，只所以封装成hooks，主要是为了方便跟其他组件搭配使用，比如说表格或者下拉框
 const useVirtualScroll = ({
@@ -9,6 +9,7 @@ const useVirtualScroll = ({
   lineHeight = 30,
   bufferSize = 20,
   threshold = 100,
+  height,
 }: {
   data: any;
   container: any;
@@ -16,6 +17,7 @@ const useVirtualScroll = ({
   lineHeight: number;
   bufferSize: number;
   threshold: number;
+  height?: Ref<number | string>;
 }) => {
   const state = reactive({
     visibleData: [],
@@ -255,6 +257,12 @@ const useVirtualScroll = ({
 
     container.value && (container.value.scrollTop = 0);
   });
+
+  watch(height, () => {
+    console.log(412341);
+    refreshContainer();
+  });
+
   let mounted = false;
   const refreshContainer = () => {
     if (mounted) {

@@ -1,12 +1,19 @@
 <template>
   <div class="demo-container">
+    <button @click="toggleHeight('low')">lower height</button>
+    <button @click="toggleHeight('high')">higher height</button>
     <div class="item">
       <t-table
         row-key="id"
         :columns="columns"
         :data="data"
-        :height="200"
-        :scroll="{ type: 'virtual', rowHeight: 48, bufferSize: 10 }"
+        :height="dynamicHeight"
+        :bordered="true"
+        :resizable="true"
+        :stripe="true"
+        :hover="true"
+        :is-fixed-row-height="true"
+        :scroll="{ type: 'virtual', rowHeight: 30, bufferSize: 10 }"
       >
       </t-table>
     </div>
@@ -14,7 +21,7 @@
 </template>
 
 <script setup lang="jsx">
-import { ref } from 'vue';
+import { ref, nextTick } from 'vue';
 
 const columns = [
   {
@@ -36,14 +43,14 @@ const columns = [
 const initData = [
   {
     id: 1,
-    instance: '当前行高度2行,当前行高度2行,当前行高度2行,当前行高度2行',
+    instance: '当前行高度1',
     status: 0,
     owner: 'jenny;peter',
     survivalTime: 1000,
   },
   {
     id: 2,
-    instance: '当前行高度2行,当前行高度2行,当前行高度2行,当前行高度2行',
+    instance: '当前行高度1',
     status: 1,
     owner: 'jenny',
     survivalTime: 1000,
@@ -114,6 +121,13 @@ times.forEach((item, i) => {
   testData[i] = { ...initData[k], id: i + 1 };
 });
 
+const toggleHeight = (t) => {
+  nextTick(() => {
+    dynamicHeight.value = t === 'low' ? `calc(100vh - 500px)` : `calc(100vh - 100px)`;
+  });
+};
+
 const data = ref([...testData]);
 const sort = ref({});
+const dynamicHeight = ref(`calc(100vh - 500px)`);
 </script>
