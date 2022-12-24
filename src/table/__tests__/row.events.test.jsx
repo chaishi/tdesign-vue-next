@@ -21,7 +21,7 @@ const TABLES = [Table, BaseTable, PrimaryTable, EnhancedTable];
 
 TABLES.forEach((TTable) => {
   describe(TTable.name, () => {
-    it('Events.onCellClick', async () => {
+    it('Events.onCellClick', () => {
       const fn = vi.fn();
       const wrapper = mount({
         render() {
@@ -29,11 +29,10 @@ TABLES.forEach((TTable) => {
         },
       });
       wrapper.find('td').trigger('click');
-      await wrapper.vm.$nextTick();
       expect(fn).toHaveBeenCalled();
     });
 
-    it('Events.onRowClick', async () => {
+    it('Events.onRowClick', () => {
       const fn = vi.fn();
       const wrapper = mount({
         render() {
@@ -41,11 +40,10 @@ TABLES.forEach((TTable) => {
         },
       });
       wrapper.find('tbody').find('tr').trigger('click');
-      await wrapper.vm.$nextTick();
       expect(fn).toHaveBeenCalled();
     });
 
-    it('Events.onRowDblclick', async () => {
+    it('Events.onRowDblclick', () => {
       const fn = vi.fn();
       const wrapper = mount({
         render() {
@@ -53,11 +51,10 @@ TABLES.forEach((TTable) => {
         },
       });
       wrapper.find('tbody').find('tr').trigger('dblclick');
-      await wrapper.vm.$nextTick();
       expect(fn).toHaveBeenCalled();
     });
 
-    it('Events.onRowMouseup', async () => {
+    it('Events.onRowMouseup', () => {
       const fn = vi.fn();
       const wrapper = mount({
         render() {
@@ -65,11 +62,10 @@ TABLES.forEach((TTable) => {
         },
       });
       wrapper.find('tbody').find('tr').trigger('mouseup');
-      await wrapper.vm.$nextTick();
       expect(fn).toHaveBeenCalled();
     });
 
-    it('Events.onRowMousedown', async () => {
+    it('Events.onRowMousedown', () => {
       const fn = vi.fn();
       const wrapper = mount({
         render() {
@@ -77,11 +73,10 @@ TABLES.forEach((TTable) => {
         },
       });
       wrapper.find('tbody').find('tr').trigger('mousedown');
-      await wrapper.vm.$nextTick();
       expect(fn).toHaveBeenCalled();
     });
 
-    it('Events.onRowMouseenter', async () => {
+    it('Events.onRowMouseenter', () => {
       const fn = vi.fn();
       const wrapper = mount({
         render() {
@@ -89,11 +84,10 @@ TABLES.forEach((TTable) => {
         },
       });
       wrapper.find('tbody').find('tr').trigger('mouseenter');
-      await wrapper.vm.$nextTick();
       expect(fn).toHaveBeenCalled();
     });
 
-    it('Events.onRowMouseleave', async () => {
+    it('Events.onRowMouseleave', () => {
       const fn = vi.fn();
       const wrapper = mount({
         render() {
@@ -101,11 +95,10 @@ TABLES.forEach((TTable) => {
         },
       });
       wrapper.find('tbody').find('tr').trigger('mouseleave');
-      await wrapper.vm.$nextTick();
       expect(fn).toHaveBeenCalled();
     });
 
-    it('Events.onRowMouseover', async () => {
+    it('Events.onRowMouseover', () => {
       const fn = vi.fn();
       const wrapper = mount({
         render() {
@@ -113,7 +106,6 @@ TABLES.forEach((TTable) => {
         },
       });
       wrapper.find('tbody').find('tr').trigger('mouseover');
-      await wrapper.vm.$nextTick();
       expect(fn).toHaveBeenCalled();
     });
   });
