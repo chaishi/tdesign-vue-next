@@ -17,7 +17,7 @@ describe('Space Component', () => {
   it(`props.breakLine is equal to true`, () => {
     const wrapper = getSpaceDefaultMount(Space, { breakLine: true });
     const domWrapper = wrapper.findComponent(Space);
-    expect(domWrapper.attributes('style').includes('flex-wrap: wrap;')).toBeTruthy();
+    expect(domWrapper.element.style.flexWrap).toBe('wrap');
   });
 
   ['vertical', 'horizontal'].forEach((item) => {
@@ -42,16 +42,21 @@ describe('Space Component', () => {
   it(`props.size is equal to 'small'`, () => {
     const wrapper = getSpaceDefaultMount(Space, { size: 'small' });
     const domWrapper = wrapper.findComponent(Space);
-    expect(domWrapper.attributes('style').includes('gap: 8px;')).toBeTruthy();
+    expect(domWrapper.element.style.gap).toBe('8px');
   });
   it(`props.size is equal to 'large'`, () => {
     const wrapper = getSpaceDefaultMount(Space, { size: 'large' });
     const domWrapper = wrapper.findComponent(Space);
-    expect(domWrapper.attributes('style').includes('gap: 24px;')).toBeTruthy();
+    expect(domWrapper.element.style.gap).toBe('24px');
   });
   it(`props.size is equal to '38px'`, () => {
     const wrapper = getSpaceDefaultMount(Space, { size: '38px' });
     const domWrapper = wrapper.findComponent(Space);
-    expect(domWrapper.attributes('style').includes('gap: 38px;')).toBeTruthy();
+    expect(domWrapper.element.style.gap).toBe('38px');
+  });
+  it(`props.size is equal to ['20px', '80px']`, () => {
+    const wrapper = getSpaceDefaultMount(Space, { size: ['20px', '80px'] });
+    const domWrapper = wrapper.findComponent(Space);
+    expect(domWrapper.element.style.gap).toBe('20px 80px');
   });
 });
